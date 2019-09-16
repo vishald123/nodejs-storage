@@ -1,5 +1,5 @@
-/*!
- * Copyright 2014 Google Inc. All Rights Reserved.
+/**
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -295,7 +295,6 @@ export interface FileOptions {
 
 export interface CopyOptions {
   destinationKmsKeyName?: string;
-  keepAcl?: string;
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
@@ -859,7 +858,6 @@ class File extends ServiceObject<File> {
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
    *     that will be used to encrypt the object. Overwrites the object
    * metadata's `kms_key_name` value, if any.
-   * @property {string} [keepAcl] Retain the ACL for the new file.
    * @property {string} [predefinedAcl] Set the ACL for the new file.
    * @property {string} [token] A previously-returned `rewriteToken` from an
    *     unfinished rewrite request.
@@ -1192,6 +1190,9 @@ class File extends ServiceObject<File> {
 
     // tslint:disable-next-line:no-any
     let validateStream: any; // Created later, if necessary.
+
+    // TODO: remove `through2` dependency in favor of native PassThrough
+    // once Node 8 support is discontinued
     const throughStream = streamEvents(through()) as Duplex;
 
     let crc32c = true;
