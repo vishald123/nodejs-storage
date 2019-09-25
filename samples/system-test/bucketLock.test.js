@@ -26,7 +26,6 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
 const cwd = path.join(__dirname, '..');
-// const cmd = 'node bucketLock.js';
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 const fileName = 'test.txt';
